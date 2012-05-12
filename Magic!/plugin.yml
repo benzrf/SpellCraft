@@ -1,0 +1,46 @@
+name: SpellCraft
+main: com.benzrf.spellcraft.SpellCraft
+version: 0.9.3
+commands:
+ spellcraft:
+  description: Perform some task with SpellCraft.
+  usage: Unknown command. Type "help" for help.
+ listspells:
+  description: List all the spells.
+  usage: Unknown command. Type "help" for help.
+permissions:
+ spellcraft.*:
+  description: Gives all SpellCraft permissions.
+  children:
+   spellcraft.sacrifice: true
+   spellcraft.admin: true
+   spellcraft.colorchat: true
+   spellcraft.fissureplayer: true
+   spellcraft.voodooplayer: true
+   spellcraft.allspells: true
+   spellcraft.mana: true
+   spellcraft.command: true
+ spellcraft.sacrifice:
+  description: Grants the ability to sacrifice at altars in order to acquire spells.
+  default: false
+ spellcraft.admin:
+  description: Grants the ability to use SpellCraft's admin commands.
+  default: false
+ spellcraft.colorchat:
+  description: Grants the ability to use SpellCraft's ColorChat ability.
+  default: false
+ spellcraft.fissureplayer:
+  description: Grants the ability to use fissure on other players.
+  default: false
+ spellcraft.voodooplayer:
+  description: Grants the ability to use voodoo on other players.
+  default: false
+ spellcraft.allspells:
+  description: Grants the ability to use every spell.
+  default: false
+ spellcraft.mana:
+  description: Grants the ability to gain mana by killing mobs.
+  default: false
+ spellcraft.command:
+  description: Grants the ability to use /spellcraft.
+  default: false
