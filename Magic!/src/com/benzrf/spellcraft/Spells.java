@@ -14,19 +14,34 @@ import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Blaze;
+import org.bukkit.entity.Chicken;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Pig;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Slime;
 import org.bukkit.entity.Snowball;
+import org.bukkit.entity.Snowman;
+import org.bukkit.entity.Spider;
 import org.bukkit.entity.Wolf;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -548,6 +563,103 @@ public class Spells
 		a.t = (Player) event.getRightClicked();
 		a.id = SpellCraft.instance.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, a, 0, 20);
 		rList.add(a);
+		return true;
+	}
+	
+	public static boolean raise(PlayerInteractEntityEvent event)
+	{
+		List<Block> list = event.getPlayer().getLineOfSight(null, 100);
+		Location loc = list.get(list.size() - 1).getLocation();
+		Entity a = event.getPlayer().getWorld().spawnArrow(loc, new Vector(0, 0, 0), 0, 0);
+		ArrayList<Entity> eL = (ArrayList<Entity>) a.getNearbyEntities(2, 2, 2);
+		a.remove();
+		for (Entity i : eL)
+		{
+			if (i instanceof Item)
+			{
+				Material m = ((Item) i).getItemStack().getType();
+				if (m.equals(Material.RAW_CHICKEN))
+				{
+					i.getWorld().spawn(i.getLocation(), Chicken.class);
+					i.remove();
+				}
+				else if (m.equals(Material.RAW_BEEF))
+				{
+					i.getWorld().spawn(i.getLocation(), Cow.class);
+					i.remove();
+				}
+				else if (m.equals(Material.PORK))
+				{
+					i.getWorld().spawn(i.getLocation(), Pig.class);
+					i.remove();
+				}
+				else if (m.equals(Material.WOOL))
+				{
+					i.getWorld().spawn(i.getLocation(), Sheep.class);
+					i.remove();
+				}
+				else if (m.equals(Material.SNOW_BALL))
+				{
+					i.getWorld().spawn(i.getLocation(), Snowman.class);
+					i.remove();
+				}
+				else if (m.equals(Material.BLAZE_ROD))
+				{
+					i.getWorld().spawn(i.getLocation(), Blaze.class);
+					i.remove();
+				}
+				else if (m.equals(Material.SULPHUR))
+				{
+					i.getWorld().spawn(i.getLocation(), Creeper.class);
+					i.remove();
+				}
+				else if (m.equals(Material.RAW_CHICKEN))
+				{
+					i.getWorld().spawn(i.getLocation(), Chicken.class);
+					i.remove();
+				}
+				else if (m.equals(Material.ENDER_PEARL))
+				{
+					i.getWorld().spawn(i.getLocation(), Enderman.class);
+					i.remove();
+				}
+				else if (m.equals(Material.GHAST_TEAR) && i.getWorld().getEnvironment().equals(Environment.NETHER))
+				{
+					i.getWorld().spawn(i.getLocation(), Ghast.class);
+					i.remove();
+				}
+				else if (m.equals(Material.MAGMA_CREAM))
+				{
+					i.getWorld().spawn(i.getLocation(), MagmaCube.class);
+					i.remove();
+				}
+				else if (m.equals(Material.BONE))
+				{
+					i.getWorld().spawn(i.getLocation(), Skeleton.class);
+					i.remove();
+				}
+				else if (m.equals(Material.SLIME_BALL))
+				{
+					i.getWorld().spawn(i.getLocation(), Slime.class);
+					i.remove();
+				}
+				else if (m.equals(Material.STRING))
+				{
+					i.getWorld().spawn(i.getLocation(), Spider.class);
+					i.remove();
+				}
+				else if (m.equals(Material.ROTTEN_FLESH) && i.getWorld().getEnvironment().equals(Environment.NORMAL))
+				{
+					i.getWorld().spawn(i.getLocation(), Zombie.class);
+					i.remove();
+				}
+				else if (m.equals(Material.ROTTEN_FLESH) && i.getWorld().getEnvironment().equals(Environment.NETHER))
+				{
+					i.getWorld().spawn(i.getLocation(), PigZombie.class);
+					i.remove();
+				}
+			}
+		}
 		return true;
 	}
 	

@@ -54,6 +54,7 @@ public class SpellCraft extends JavaPlugin
 		addSpell("bunker", "[IRON_BLOCK]", 4);
 		addSpell("snowstorm", "[SNOW_BLOCK, SNOW_BLOCK, SNOW_BLOCK]", 0);
 		addSpell("heisalreadyhere", "[WOOD, WOOD]", 2);
+		addSpell("raise", "[SOUL_SAND]", 1);
 	}
 
 	@Override
