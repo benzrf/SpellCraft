@@ -324,11 +324,12 @@ public class SpellCraft extends JavaPlugin
 	
 	public void setSpell(CommandSender sender, String[] args)
 	{
+		args[2] = args[2].toLowerCase();
 		if (sender.getServer().matchPlayer(args[1]).size() == 0)
 		{
 			sender.sendMessage(ChatColor.RED + pluginName + " couldn't find anybody named " + ChatColor.LIGHT_PURPLE + args[1] + ChatColor.RED + ".");
 		}
-		else if (args[2].toLowerCase().equalsIgnoreCase("none"))
+		else if (args[2].equalsIgnoreCase("none"))
 		{
 			playerMap.put(this.getServer().matchPlayer(args[1]).get(0).getName(), "none");
 			playerMap2.put(this.getServer().matchPlayer(args[1]).get(0).getName(), "none");
@@ -336,7 +337,7 @@ public class SpellCraft extends JavaPlugin
 			playerMap4.put(this.getServer().matchPlayer(args[1]).get(0).getName(), "none");
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + sender.getServer().matchPlayer(args[1]).get(0).getName() + ChatColor.GREEN + "'s current spells have been set to " + ChatColor.GOLD + args[2] + ChatColor.GREEN + ".");
 		}
-		else if (!spellCostMap.containsKey(args[2].toLowerCase()))
+		else if (!spellCostMap.containsKey(args[2]))
 		{
 			sender.sendMessage(ChatColor.RED + pluginName + " couldn't find a spell called " + ChatColor.GOLD + args[2] + ChatColor.RED + ".");
 		}
@@ -367,11 +368,12 @@ public class SpellCraft extends JavaPlugin
 	
 	public void setSpell(String[] args)
 	{
+		args[1] = args[1].toLowerCase();
 		if (this.getServer().matchPlayer(args[0]).size() == 0)
 		{
 			return;
 		}
-		else if (!spellCostMap.containsKey(args[1].toLowerCase()))
+		else if (!spellCostMap.containsKey(args[1]))
 		{
 			return;
 		}
