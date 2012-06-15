@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import com.benzrf.spellcraft.SpellCraft;
 import com.benzrf.spellcraft.Spells;
 
-public class TauntRunnable implements SpellCraftRunnable
+public class TauntRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

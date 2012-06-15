@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import com.benzrf.spellcraft.Spells;
 
-public class FissureRunnable implements SpellCraftRunnable
+public class FissureRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

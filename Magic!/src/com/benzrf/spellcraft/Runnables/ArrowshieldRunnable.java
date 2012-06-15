@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 import com.benzrf.spellcraft.SpellCraft;
 import com.benzrf.spellcraft.Spells;
 
-public class ArrowshieldRunnable implements SpellCraftRunnable
+public class ArrowshieldRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

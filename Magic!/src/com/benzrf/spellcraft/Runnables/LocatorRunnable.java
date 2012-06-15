@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class LocatorRunnable implements SpellCraftRunnable
+public class LocatorRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

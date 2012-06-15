@@ -125,7 +125,6 @@ public class Spells
 		f.id = SpellCraft.instance.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, f, 0, 5);
 		f.p = event.getPlayer();
 		event.getPlayer().sendMessage(ChatColor.BLUE + "Frozen!");
-		rList.add(f);
 		return true;
 	}
 	
@@ -275,7 +274,6 @@ public class Spells
 		f.blocks = blocks;
 		f.blocks2 = blocks2;
 		SpellCraft.instance.getServer().getScheduler().scheduleSyncDelayedTask(SpellCraft.instance, f, 100L);
-		rList.add(f);
 		return;
 	}
 	
@@ -307,7 +305,6 @@ public class Spells
 		v.lastELoc = event.getRightClicked().getLocation();
 		v.id = SpellCraft.instance.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, v, 0, 1);
 		p.sendMessage(ChatColor.BLUE + "Voodoo'd!");
-		rList.add(v);
 		Location loc = event.getRightClicked().getLocation();
 		loc.getWorld().playEffect(loc.clone().add(0, 1, 0), Effect.SMOKE, 0, 30);
 		loc.getWorld().playEffect(loc.clone().add(0, 1, 0), Effect.SMOKE, 1, 30);
@@ -333,7 +330,6 @@ public class Spells
 		f.p = event.getPlayer();
 		f.id = SpellCraft.instance.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, f, 0, 1);
 		event.getPlayer().sendMessage(ChatColor.BLUE + "Feather fall engaged!");
-		rList.add(f);
 		return true;
 	}
 	
@@ -353,7 +349,6 @@ public class Spells
 		s.w = w;
 		s.p = p;
 		s.id = p.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, s, 0, 5);
-		rList.add(s);
 		return true;
 	}
 	
@@ -364,7 +359,6 @@ public class Spells
 		ArrowshieldRunnable a = new ArrowshieldRunnable();
 		a.p = event.getPlayer();
 		a.id = SpellCraft.instance.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, a, 0, 2);
-		rList.add(a);
 		return true;
 	}
 	
@@ -402,7 +396,6 @@ public class Spells
 		l.event = event;
 		SpellCraft.instance.getServer().getScheduler().scheduleSyncDelayedTask(SpellCraft.instance, l, 60);
 		event.getPlayer().sendMessage(ChatColor.BLUE + "Hold the item you get from the ore in your hand.");
-		rList.add(l);
 		return true;
 	}
 	
@@ -431,7 +424,6 @@ public class Spells
 		mr.l = loc;
 		mr.id = SpellCraft.instance.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, mr, 0, 1);
 		mr.p = event.getPlayer();
-		rList.add(mr);
 		return true;
 	}
 	
@@ -562,11 +554,10 @@ public class Spells
 		a.p = event.getPlayer();
 		a.t = (Player) event.getRightClicked();
 		a.id = SpellCraft.instance.getServer().getScheduler().scheduleSyncRepeatingTask(SpellCraft.instance, a, 0, 20);
-		rList.add(a);
 		return true;
 	}
 	
-	public static boolean raise(PlayerInteractEntityEvent event)
+	public static boolean raise(PlayerInteractEvent event)
 	{
 		List<Block> list = event.getPlayer().getLineOfSight(null, 100);
 		Location loc = list.get(list.size() - 1).getLocation();

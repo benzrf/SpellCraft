@@ -2,10 +2,16 @@ package com.benzrf.spellcraft.Runnables;
 
 import org.bukkit.entity.Player;
 
-public interface SpellCraftRunnable extends Runnable
+import com.benzrf.spellcraft.Spells;
+
+public abstract class SpellCraftRunnable implements Runnable
 {
-	public void run();
-	public String getSpellName();
-	public boolean onStop();
-	public Player getCaster();
+	public SpellCraftRunnable()
+	{
+		Spells.rList.add(this);
+	}
+	public abstract void run();
+	public abstract String getSpellName();
+	public abstract boolean onStop();
+	public abstract Player getCaster();
 }

@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import com.benzrf.spellcraft.SpellCraft;
 import com.benzrf.spellcraft.Spells;
 
-public class HeisalreadyhereRunnable implements SpellCraftRunnable
+public class HeisalreadyhereRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

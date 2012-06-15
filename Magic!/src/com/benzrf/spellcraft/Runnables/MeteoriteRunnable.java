@@ -14,7 +14,7 @@ import org.bukkit.entity.Entity;
 import com.benzrf.spellcraft.SpellCraft;
 import com.benzrf.spellcraft.Spells;
 
-public class MeteoriteRunnable implements SpellCraftRunnable
+public class MeteoriteRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

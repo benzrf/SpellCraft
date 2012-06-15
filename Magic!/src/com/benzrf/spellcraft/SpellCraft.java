@@ -124,21 +124,17 @@ public class SpellCraft extends JavaPlugin
 			}
 		}
 		
-		String intSacrifice = "";
+		String sacrifice = "";
 		for (String s : spellBlockMap.keySet())
 		{
 			if (c.getString("sacrifices." + spellBlockMap.get(s)) == null)
 			{
 				for (String s2 : s.substring(1, s.length() - 1).split(", "))
 				{
-					intSacrifice += " " + s2;
+					sacrifice += " " + s2;
 				}
-				if (intSacrifice.contains(" ") && !intSacrifice.contains(" "))
-				{
-					intSacrifice = "'" + intSacrifice.substring(1) + "'";
-				}
-				getConfig().set("sacrifices." + spellBlockMap.get(s), intSacrifice.substring(1));
-				intSacrifice = "";
+				getConfig().set("sacrifices." + spellBlockMap.get(s), sacrifice.substring(1));
+				sacrifice = "";
 			}
 		}
 		
@@ -424,16 +420,7 @@ public class SpellCraft extends JavaPlugin
 
 	public void addMana(Player p, int add)
 	{
-		int current;
-		try
-		{
-			current = Integer.parseInt(playerManaMap.get(p.getName()));
-		}
-		catch (NumberFormatException e)
-		{
-			current = 0;
-		}
-		playerManaMap.put(p.getName(), Integer.toString(current + add));
+		playerManaMap.put(p.getName(), Integer.toString(getMana(p) + add));
 	}
 	
 	public int getMana(Player p)

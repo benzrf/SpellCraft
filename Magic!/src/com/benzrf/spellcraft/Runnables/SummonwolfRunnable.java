@@ -6,7 +6,7 @@ import org.bukkit.entity.Wolf;
 
 import com.benzrf.spellcraft.Spells;
 
-public class SummonwolfRunnable implements SpellCraftRunnable
+public class SummonwolfRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

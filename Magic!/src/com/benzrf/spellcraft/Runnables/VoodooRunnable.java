@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import com.benzrf.spellcraft.SpellCraft;
 import com.benzrf.spellcraft.Spells;
 
-public class VoodooRunnable implements SpellCraftRunnable
+public class VoodooRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{

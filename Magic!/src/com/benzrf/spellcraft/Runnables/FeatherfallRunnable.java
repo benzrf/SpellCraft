@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import com.benzrf.spellcraft.SpellCraft;
 import com.benzrf.spellcraft.Spells;
 
-public class FeatherfallRunnable implements SpellCraftRunnable
+public class FeatherfallRunnable extends SpellCraftRunnable
 {
 	public void run()
 	{
