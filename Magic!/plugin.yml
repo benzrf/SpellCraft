@@ -1,6 +1,6 @@
 name: SpellCraft
 main: com.benzrf.spellcraft.SpellCraft
-version: 0.9.5B
+version: 0.9.6B
 commands:
  spellcraft:
   description: Perform some task with SpellCraft.
@@ -34,6 +34,9 @@ permissions:
   default: false
  spellcraft.voodooplayer:
   description: Grants the ability to use voodoo on other players.
+  default: false
+ spellcraft.fusrodahplayer:
+  description: Grants the ability to use fusrodah on other players.
   default: false
  spellcraft.allspells:
   description: Grants the ability to use every spell.
