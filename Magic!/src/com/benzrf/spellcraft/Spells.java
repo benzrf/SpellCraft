@@ -34,7 +34,6 @@ import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Snowball;
@@ -557,6 +556,7 @@ public class Spells
 		return true;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static boolean raise(PlayerInteractEvent event)
 	{
 		List<Block> list = event.getPlayer().getLineOfSight(null, 100);
@@ -564,90 +564,206 @@ public class Spells
 		Entity a = event.getPlayer().getWorld().spawnArrow(loc, new Vector(0, 0, 0), 0, 0);
 		ArrayList<Entity> eL = (ArrayList<Entity>) a.getNearbyEntities(2, 2, 2);
 		a.remove();
+		int counter = 10;
 		for (Entity i : eL)
 		{
+//			SpellCraft.instance.thelogger.info(Integer.toString(counter));
+			if (counter <= 0)
+			{
+				return true;
+			}
 			if (i instanceof Item)
 			{
 				Material m = ((Item) i).getItemStack().getType();
+				@SuppressWarnings("rawtypes")
+				Class c = null;
 				if (m.equals(Material.RAW_CHICKEN))
 				{
-					i.getWorld().spawn(i.getLocation(), Chicken.class);
-					i.remove();
+					c = Chicken.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.RAW_BEEF))
 				{
-					i.getWorld().spawn(i.getLocation(), Cow.class);
-					i.remove();
+					c = Cow.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.PORK))
 				{
-					i.getWorld().spawn(i.getLocation(), Pig.class);
-					i.remove();
-				}
-				else if (m.equals(Material.WOOL))
-				{
-					i.getWorld().spawn(i.getLocation(), Sheep.class);
-					i.remove();
+					c = Pig.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.SNOW_BALL))
 				{
-					i.getWorld().spawn(i.getLocation(), Snowman.class);
-					i.remove();
+					c = Snowman.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.BLAZE_ROD))
 				{
-					i.getWorld().spawn(i.getLocation(), Blaze.class);
-					i.remove();
+					c = Blaze.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.SULPHUR))
 				{
-					i.getWorld().spawn(i.getLocation(), Creeper.class);
-					i.remove();
+					c = Creeper.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.RAW_CHICKEN))
 				{
-					i.getWorld().spawn(i.getLocation(), Chicken.class);
-					i.remove();
+					c = Chicken.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.ENDER_PEARL))
 				{
-					i.getWorld().spawn(i.getLocation(), Enderman.class);
-					i.remove();
+					c = Enderman.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.GHAST_TEAR) && i.getWorld().getEnvironment().equals(Environment.NETHER))
 				{
-					i.getWorld().spawn(i.getLocation(), Ghast.class);
-					i.remove();
+					c = Ghast.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.MAGMA_CREAM))
 				{
-					i.getWorld().spawn(i.getLocation(), MagmaCube.class);
-					i.remove();
+					c = MagmaCube.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.BONE))
 				{
-					i.getWorld().spawn(i.getLocation(), Skeleton.class);
-					i.remove();
+					c = Skeleton.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.SLIME_BALL))
 				{
-					i.getWorld().spawn(i.getLocation(), Slime.class);
-					i.remove();
+					c = Slime.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.STRING))
 				{
-					i.getWorld().spawn(i.getLocation(), Spider.class);
-					i.remove();
+					c = Spider.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.ROTTEN_FLESH) && i.getWorld().getEnvironment().equals(Environment.NORMAL))
 				{
-					i.getWorld().spawn(i.getLocation(), Zombie.class);
-					i.remove();
+					c = Zombie.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
 				}
 				else if (m.equals(Material.ROTTEN_FLESH) && i.getWorld().getEnvironment().equals(Environment.NETHER))
 				{
-					i.getWorld().spawn(i.getLocation(), PigZombie.class);
-					i.remove();
+					c = PigZombie.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
+				}
+				if (c != null)
+				{
+					i.getWorld().spawn(i.getLocation(), c);
+					i.getWorld().playEffect(i.getLocation(), Effect.SMOKE, 4);
+					i.getWorld().playEffect(i.getLocation(), Effect.SMOKE, 4);
+					i.getWorld().playEffect(i.getLocation(), Effect.SMOKE, 4);
+					counter--;
 				}
 			}
 		}
