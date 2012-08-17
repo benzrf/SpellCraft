@@ -25,7 +25,6 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Item;
@@ -338,7 +337,7 @@ public class Spells
 		Player p = ((Player) ((Projectile) event.getDamager()).getShooter());
 		Location loc = p.getLocation().toVector().getMidpoint(event.getEntity().getLocation().toVector()).toLocation(p.getWorld());
 		p.getWorld().createExplosion(loc, 0);
-		Wolf w = (Wolf) p.getWorld().spawnCreature(loc, EntityType.WOLF);
+		Wolf w = (Wolf) p.getWorld().spawn(loc, Wolf.class);
 		w.setOwner(p);
 		w.setHealth(20);
 		w.setTarget((LivingEntity) event.getEntity());

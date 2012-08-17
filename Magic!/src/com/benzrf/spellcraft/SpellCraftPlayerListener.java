@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -211,63 +211,17 @@ public class SpellCraftPlayerListener implements Listener
 	}
 
 	@EventHandler
-	public void onPlayerChat(PlayerChatEvent event)
+	public void onPlayerChat(final AsyncPlayerChatEvent event)
 	{
 		Player p = event.getPlayer();
 		if (event.getMessage().equalsIgnoreCase(theplugin.sacrificePhrase) && (p.hasPermission(theplugin.permsName + ".sacrifice") || p.isOp()))
 		{
-			String blocks = "";
-			for (int x = -5; x <= -3; x++)
-			{
-				for (int y = -1; y <= 2; y++)
+			theplugin.getServer().getScheduler().scheduleSyncDelayedTask(theplugin, new Runnable() {
+				public void run()
 				{
-					for (int z = -2; z <= 2; z++)
-					{
-						if (!(x == -4 && y == 0 && z == -1) && !(x == -4 && y == 0 && z == 0) && !(x == -4 && y == 0 && z == 1))
-						{
-							blocks = blocks + Integer.toString(p.getWorld().getBlockAt(p.getLocation().clone().add(x, y, z)).getTypeId()) + ", ";
-						}
-				 	}
-				}
-			}
-			if (blocks.equals("1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 57, 41, 41, 41, 57, 0, 42, 42, 42, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "))
-			{
-				ArrayList<String> sacrificeBlocks = new ArrayList<String>();
-				if (p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 1)).getType() != Material.AIR)
-				{
-					sacrificeBlocks.add(p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 1)).getType().toString());
-		 	 	}
-				if (p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 0)).getType() != Material.AIR)
-			 	{
-					sacrificeBlocks.add(p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 0)).getType().toString());
-		 	 	}
-				if (p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, -1)).getType() != Material.AIR)
-				{
-					sacrificeBlocks.add(p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, -1)).getType().toString());
-		 	 	}
-				Collections.sort(sacrificeBlocks);
-				if (theplugin.spellBlockMap.containsKey(sacrificeBlocks.toString()))
-				{
-					String spellName = theplugin.spellBlockMap.get(sacrificeBlocks.toString());
-					if (!p.hasPermission(theplugin.permsName + ".spells." + spellName) && !p.hasPermission(theplugin.permsName + ".allspells"))
-					{
-						return;
-					}
-					if (!spellName.equals("") && theplugin.HEEnabled)
-					{
-						HawkEyeAPI.addCustomEntry(theplugin, "Sacrificed and gained spell", p, p.getLocation(), spellName);
-					}
-					event.setCancelled(true);
-					theplugin.setSpell(new String[] {p.getName(), spellName});
-					p.getWorld().strikeLightning(p.getLocation().getBlock().getLocation().clone().add(-4, 0, -1));
-					p.getWorld().strikeLightning(p.getLocation().getBlock().getLocation().clone().add(-4, 0, 0));
-					p.getWorld().strikeLightning(p.getLocation().getBlock().getLocation().clone().add(-4, 0, 1));
-					p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, -1)).setTypeId(0);
-					p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 0)).setTypeId(0);
-					p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 1)).setTypeId(0);
-					p.sendMessage(theplugin.sacrificeMessage.replaceAll("%spell", spellName).replaceAll("%SPELL", spellName.toUpperCase()));
-				}
-			}
+					sacrifice(event);
+				}				
+			});
 		}
 		if (p.isOp() || p.hasPermission(theplugin.permsName + ".colorchat"))
 		{
@@ -279,6 +233,63 @@ public class SpellCraftPlayerListener implements Listener
 			newMessage = newMessage.replaceAll("%%%", "§");
 			newMessage = newMessage.replaceAll("&&&", "§");
 			event.setMessage(newMessage);
+		}
+	}
+	
+	public void sacrifice(AsyncPlayerChatEvent event)
+	{
+		Player p = event.getPlayer();
+		String blocks = "";
+		for (int x = -5; x <= -3; x++)
+		{
+			for (int y = -1; y <= 2; y++)
+			{
+				for (int z = -2; z <= 2; z++)
+				{
+					if (!(x == -4 && y == 0 && z == -1) && !(x == -4 && y == 0 && z == 0) && !(x == -4 && y == 0 && z == 1))
+					{
+						blocks = blocks + Integer.toString(p.getWorld().getBlockAt(p.getLocation().clone().add(x, y, z)).getTypeId()) + ", ";
+					}
+			 	}
+			}
+		}
+		if (blocks.equals("1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 57, 41, 41, 41, 57, 0, 42, 42, 42, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "))
+		{
+			ArrayList<String> sacrificeBlocks = new ArrayList<String>();
+			if (p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 1)).getType() != Material.AIR)
+			{
+				sacrificeBlocks.add(p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 1)).getType().toString());
+	 	 	}
+			if (p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 0)).getType() != Material.AIR)
+		 	{
+				sacrificeBlocks.add(p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 0)).getType().toString());
+	 	 	}
+			if (p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, -1)).getType() != Material.AIR)
+			{
+				sacrificeBlocks.add(p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, -1)).getType().toString());
+	 	 	}
+			Collections.sort(sacrificeBlocks);
+			if (theplugin.spellBlockMap.containsKey(sacrificeBlocks.toString()))
+			{
+				String spellName = theplugin.spellBlockMap.get(sacrificeBlocks.toString());
+				if (!p.hasPermission(theplugin.permsName + ".spells." + spellName) && !p.hasPermission(theplugin.permsName + ".allspells"))
+				{
+					return;
+				}
+				if (!spellName.equals("") && theplugin.HEEnabled)
+				{
+					HawkEyeAPI.addCustomEntry(theplugin, "Sacrificed and gained spell", p, p.getLocation(), spellName);
+				}
+				event.setCancelled(true);
+				theplugin.setSpell(new String[] {p.getName(), spellName});
+				p.getWorld().strikeLightning(p.getLocation().getBlock().getLocation().clone().add(-4, 0, -1));
+				p.getWorld().strikeLightning(p.getLocation().getBlock().getLocation().clone().add(-4, 0, 0));
+				p.getWorld().strikeLightning(p.getLocation().getBlock().getLocation().clone().add(-4, 0, 1));
+				p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, -1)).setTypeId(0);
+				p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 0)).setTypeId(0);
+				p.getWorld().getBlockAt(p.getLocation().clone().add(-4, 0, 1)).setTypeId(0);
+				p.sendMessage(theplugin.sacrificeMessage.replaceAll("%spell", spellName).replaceAll("%SPELL", spellName.toUpperCase()));
+			}
 		}
 	}
 	
