@@ -2,7 +2,6 @@ package com.benzrf.spellcraft.Runnables;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.benzrf.spellcraft.SpellCraft;
@@ -14,7 +13,7 @@ public class HeisalreadyhereRunnable extends SpellCraftRunnable
 	{
 		if (status)
 		{
-			p.chat("Â§eWÂ§9HÂ§4EÂ§dNÂ§f Â§cIÂ§f Â§2AÂ§4MÂ§f Â§eAÂ§0LÂ§9RÂ§4EÂ§dAÂ§cDÂ§eYÂ§f Â§4HÂ§0EÂ§eRÂ§9EÂ§4?");
+			p.chat("§eW§9H§4E§dN§f §cI§f §2A§4M§f §eA§0L§9R§4E§dA§cD§eY§f §4H§0E§eR§9E§4?");
 			p.getWorld().playEffect(p.getLocation(), Effect.POTION_BREAK, 228);
 			p.teleport(t);
 			SpellCraft.instance.getServer().getScheduler().cancelTask(id);
@@ -26,22 +25,6 @@ public class HeisalreadyhereRunnable extends SpellCraftRunnable
 			p.chat(ChatColor.DARK_GREEN + "HOW DO YOU EXPECT TO OUTRUN ME...");
 			status = true;
 		}
-	}
-	
-	Location getLaunchPoint(Player p, int multiplier)
-	{
-		Location fromloc = p.getEyeLocation();
-		float adjuster = p.getLocation().getPitch();
-		if (adjuster < 45)
-		{
-			adjuster = adjuster / 30;
-		}
-		else
-		{
-			adjuster = 1;
-		}
-		fromloc = fromloc.add(fromloc.getDirection().multiply(adjuster * multiplier));
-		return fromloc;
 	}
 	
 	@Override

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 //import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -39,7 +40,7 @@ public class SpellCraft extends JavaPlugin
 		addSpell("air", "[PUMPKIN]", 4);
 		addSpell("derp", "[CAKE_BLOCK]", 3);
 		addSpell("lightning", "[REDSTONE_TORCH_ON, REDSTONE_TORCH_ON, REDSTONE_WIRE]", 1);
-		addSpell("food", "[BROWN_MUSHROOM, MELON_BLOCK, SOIL]", 4);
+		addSpell("food", "[MELON_BLOCK, PUMPKIN, SOIL]", 4);
 		addSpell("fissure", "[GOLD_ORE, GOLD_ORE, IRON_ORE]", 3);
 		addSpell("voodoo", "[NETHERRACK, OBSIDIAN, SOUL_SAND]", 2);
 		addSpell("superjump/featherfall", "[LADDER, WOOL]", 4);
@@ -52,7 +53,7 @@ public class SpellCraft extends JavaPlugin
 		addSpell("meteorite", "[FIRE, FIRE, OBSIDIAN]", 1);
 		addSpell("barrage", "[GRAVEL, LOG]", 1);
 		addSpell("bunker", "[IRON_BLOCK]", 4);
-		addSpell("snowstorm", "[SNOW_BLOCK, SNOW_BLOCK, SNOW_BLOCK]", 0);
+		addSpell("snowstorm", "[SNOW_BLOCK, SNOW_BLOCK, SNOW_BLOCK]", 1);
 		addSpell("heisalreadyhere", "[WOOD, WOOD]", 2);
 		addSpell("raise", "[SOUL_SAND]", 1);
 	}

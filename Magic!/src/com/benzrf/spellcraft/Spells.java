@@ -22,6 +22,7 @@ import org.bukkit.entity.Blaze;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -567,7 +568,6 @@ public class Spells
 		int counter = 10;
 		for (Entity i : eL)
 		{
-//			SpellCraft.instance.thelogger.info(Integer.toString(counter));
 			if (counter <= 0)
 			{
 				return true;
@@ -748,6 +748,18 @@ public class Spells
 				else if (m.equals(Material.ROTTEN_FLESH) && i.getWorld().getEnvironment().equals(Environment.NETHER))
 				{
 					c = PigZombie.class;
+					if (((Item) i).getItemStack().getAmount() > 1)
+					{
+						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
+					}
+					else
+					{
+						i.remove();
+					}
+				}
+				else if (m.equals(Material.DRAGON_EGG) && i.getWorld().getEnvironment().equals(Environment.THE_END))
+				{
+					c = EnderDragon.class;
 					if (((Item) i).getItemStack().getAmount() > 1)
 					{
 						((Item) i).getItemStack().setAmount(((Item) i).getItemStack().getAmount() - 1);
