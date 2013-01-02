@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import net.minecraft.server.MobEffect;
-import net.minecraft.server.Packet41MobEffect;
+import net.minecraft.server.v1_4_6.MobEffect;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -16,7 +15,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftPlayer;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.Chicken;
@@ -81,7 +80,7 @@ public class Spells
 		if (event.getRightClicked() instanceof Player)
 		{
 			Player p = (Player) event.getRightClicked();
-			((CraftPlayer)p).getHandle().netServerHandler.sendPacket(new Packet41MobEffect(p.getEntityId(), new MobEffect(9, 300, 25)));
+			((CraftPlayer)p).getHandle().addEffect(new MobEffect(9, 300, 25));
 			event.getPlayer().sendMessage(ChatColor.RED + "Confused!");
 			p.getWorld().playEffect(p.getLocation(), Effect.POTION_BREAK, 1);
 			return true;
